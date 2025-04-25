@@ -32,11 +32,33 @@ void tambahKota(Kota A[], int* n, int kapasitas, const char* namaKota) {
 }
 
 void tambahOrang(Kota* kota, const char* namaOrang) {
+    Orang* baru = (Orang*)malloc(sizeof(Orang));
+    if (baru == NULL) {
+        printf("Gagal mengalokasikan memori untuk orang.\n");
+        return;
+    }
+    strcpy(baru->nm, namaOrang);
+    baru->q = NULL;
+    
+    if (kota->p == NULL) {
+        kota->p = baru;
+    } else {
+        Orang* temp = kota->p;
+        while (temp->q != NULL) {
+        temp = temp->q;
+    }
+    temp->q = baru;
+        }
+    }
 
-}
 
 void hapusSemuaOrang(Orang* head) {
-
+    Orang* temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->q;
+        free(temp);
+    }
 }
 
 void hapusKota(Kota A[], int* n, const char* namaKota) {

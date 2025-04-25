@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ArrToSLL.c"
+#include "ArrToSLL.h"
 
 int main() {
     Kota* A;
@@ -37,7 +37,21 @@ int main() {
 
         switch (pilihan) {
             case 1:
-                
+            printf("Masukkan nama kota tujuan: ");
+            fgets(namaKota, sizeof(namaKota), stdin);
+            namaKota[strcspn(namaKota, "\n")] = '\0';
+            printf("Masukkan nama orang: ");
+            fgets(namaOrang, sizeof(namaOrang), stdin);
+            namaOrang[strcspn(namaOrang, "\n")] = '\0';
+            {
+                int idx = cariKota(A, jumlahKota, namaKota);
+                if (idx == -1) {
+                    printf("Kota tidak ditemukan.\n");
+                } else {
+                    tambahOrang(&A[idx], namaOrang);
+                    printf("Orang berhasil ditambahkan ke kota %s.\n", namaKota);
+                }
+            }
                 break;
             case 2:
                 printf("Masukkan nama kota yang ingin dihapus: ");
