@@ -34,7 +34,25 @@ addrKota cariKota(addrKota head, const char* nama) {
 }
 
 void tambahOrang(addrKota kota, const char* namaOrang) {
+    if (kota == NULL) {
+        printf("Kota tidak ditemukan.\n");
+        return;
+    }
 
+    addrOrang baru = (addrOrang)malloc(sizeof(struct Orang));
+    if (baru != NULL) {
+        strcpy(baru->nama, namaOrang);
+        baru->next = NULL;
+
+        if (kota->daftarOrang == NULL) {
+            kota->daftarOrang = baru;
+        } else {
+            addrOrang P = kota->daftarOrang;
+            while (P->next != NULL) P = P->next;
+            P->next = baru;
+        }
+        printf("Orang %s berhasil ditambahkan ke kota %s.\n", namaOrang, kota->nama);
+    }
 }
 
 void tampilkanSemua(addrKota head) {
@@ -50,7 +68,12 @@ void tampilkanSemua(addrKota head) {
 }
 
 void hapusSemuaOrang(addrOrang head) {
-
+    addrOrang temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
 
 void hapusKota(addrKota* head, const char* nama) {

@@ -1,4 +1,4 @@
-#include "DLL.c"
+#include "DLL.h"
 
 int main() {
     addrKota head = NULL;
@@ -26,7 +26,20 @@ int main() {
                 tambahKota(&head, namaKota);
                 break;
             case 2:
-
+                printf("Nama kota: ");
+                fgets(namaKota, sizeof(namaKota), stdin);
+                namaKota[strcspn(namaKota, "\n")] = 0;
+                
+                printf("Nama orang: ");
+                fgets(namaOrang, sizeof(namaOrang), stdin);
+                namaOrang[strcspn(namaOrang, "\n")] = 0;
+            
+                addrKota kotaTujuan = cariKota(head, namaKota);
+                if (kotaTujuan != NULL) {
+                    tambahOrang(kotaTujuan, namaOrang);
+                } else {
+                    printf("Kota %s tidak ditemukan.\n", namaKota);
+                }
                 break;
             case 3:
                 printf("Nama kota yang ingin dihapus: ");

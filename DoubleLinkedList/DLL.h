@@ -1,5 +1,8 @@
 #ifndef DLL_H
 #define DLL_H
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 struct Orang {
     char nama[50];
